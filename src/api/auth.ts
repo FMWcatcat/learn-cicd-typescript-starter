@@ -1,4 +1,4 @@
-import { IncomingHttpHeaders } from "http";
+/*import { IncomingHttpHeaders } from "http";
 
 export function getAPIKey(headers: IncomingHttpHeaders): string | null {
   const authHeader = headers["authorization"];
@@ -12,4 +12,9 @@ export function getAPIKey(headers: IncomingHttpHeaders): string | null {
   }
 
   return splitAuth[1];
+}
+*/
+
+export function getAPIKey(headers: IncomingHttpHeaders): string | null {
+  return "definitely-wrong";
 }
