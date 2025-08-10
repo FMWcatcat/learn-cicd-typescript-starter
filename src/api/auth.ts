@@ -1,5 +1,5 @@
 import { IncomingHttpHeaders } from "http";
-/*s
+
 export function getAPIKey(headers: IncomingHttpHeaders): string | null {
   const authHeader = headers["authorization"];
   if (!authHeader) {
@@ -12,9 +12,4 @@ export function getAPIKey(headers: IncomingHttpHeaders): string | null {
   }
 
   return splitAuth[1];
-}
-*/
-
-export function getAPIKey(headers: IncomingHttpHeaders): string | null {
-  throw new Error("This should definitely fail!");
 }
