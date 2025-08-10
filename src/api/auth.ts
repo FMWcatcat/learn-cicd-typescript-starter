@@ -16,5 +16,5 @@ export function getAPIKey(headers: IncomingHttpHeaders): string | null {
 */
 
 export function getAPIKey(headers: IncomingHttpHeaders): string | null {
-  return "definitely-wrong";
+  throw new Error("This should definitely fail!");
 }
