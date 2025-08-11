@@ -24,6 +24,8 @@ jobs:
       - name: Run tests
         run: npm run test -- --coverage
 
+      
+
   style:
     name: Style
     runs-on: ubuntu-latest
@@ -45,3 +47,6 @@ jobs:
 
       - name: Run linter
         run: npm run lint
+
+      - name: Check linting
+        run: npm run lint -- --max-warnings=0
