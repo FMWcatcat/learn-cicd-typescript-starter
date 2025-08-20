@@ -18,6 +18,15 @@ if (!config.api.port) {
 const app = express();
 app.use(express.json());
 
+app.use((req, res, next) => {
+  console.log(`=== INCOMING REQUEST ===`);
+  console.log(`Method: ${req.method}`);
+  console.log(`Path: ${req.path}`);
+  console.log(`URL: ${req.url}`);
+  console.log(`======================`);
+  next();
+});
+
 app.use(
   cors({
     origin: ["https://*", "http://*"],
@@ -28,6 +37,11 @@ app.use(
     maxAge: 300,
   }),
 );
+
+app.get("/", (req, res) => {
+  console.log("=== ROOT ROUTE HANDLER CALLED ===");
+  res.send("<h1>Welcome to Notely!</h1>");
+});
 
 app.use("/", express.static(path.join(__dirname, config.api.filepathRoot)));
 
@@ -43,6 +57,8 @@ if (db) {
 v1Router.get("/healthz", handlerReadiness);
 
 app.use("/v1", v1Router);
+
+console.log("Routes registered, starting server...");
 
 app.listen(config.api.port, () => {
   console.log(`Server is running on port: ${config.api.port}`);
