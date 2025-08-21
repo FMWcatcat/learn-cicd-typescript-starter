@@ -1,13 +1,12 @@
+/// <reference types="node" />
 import { defineConfig } from "drizzle-kit";
-
-import { config } from "./src/config";
 
 export default defineConfig({
   out: "./src/db/migrations",
   schema: "./src/db/schema.ts",
   dialect: "turso",
   dbCredentials: {
-    url: config.db.url || "",
-    authToken: config.db.authToken || "",
+    url: process.env.DATABASE_URL!,
+    authToken: process.env.TURSO_AUTH_TOKEN!,
   },
 });
