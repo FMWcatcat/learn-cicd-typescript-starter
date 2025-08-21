@@ -23,6 +23,13 @@ jobs:
 
       - name: Install dependencies
         run: npm ci
+
+      - name: Debug environment variables
+        run: |
+          echo "DATABASE_URL exists: $([[ -n "$DATABASE_URL" ]] && echo "yes" || echo "no")"
+          echo "TURSO_AUTH_TOKEN exists: $([[ -n "$TURSO_AUTH_TOKEN" ]] && echo "yes" || echo "no")"
+          echo "DATABASE_URL starts with: ${DATABASE_URL:0:20}..."
+          echo "TURSO_AUTH_TOKEN starts with: ${TURSO_AUTH_TOKEN:0:10}..."
       
       - name: Install Turso CLI
         run: |
