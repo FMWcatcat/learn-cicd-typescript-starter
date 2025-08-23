@@ -36,13 +36,14 @@ jobs:
         run: |
           mkdir -p $HOME/.config/turso
           echo "[profile]" > $HOME/.config/turso/config.toml
-          echo "token='${{ secrets.TURSO_AUTH_TOKEN }}'" >> $HOME/.config/turso/config.toml
+
+      - name: Build  
+        run: |
+          npm run build
+          echo "token='${{ secrets.TURSO_AUTH_TOKEN }}'"
 
       - name: DB migration
         run: npm run db:migrate
-
-      - name: Build
-        run: npm run build
 
       - id: auth
         uses: google-github-actions/auth@v2
