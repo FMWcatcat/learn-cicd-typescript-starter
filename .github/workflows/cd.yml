@@ -23,12 +23,18 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Install Turso CLI
+      - name: Install Turso CLI (static binary)
         run: |
-          curl -sSfL https://get.tur.so/install.sh | bash
+          mkdir -p $HOME/.turso/bin
+          curl -L "https://github.com/tursodatabase/turso-cli/releases/latest/download/turso-x86_64-unknown-linux-gnu" -o $HOME/.turso/bin/turso
+          chmod +x $HOME/.turso/bin/turso
+          echo "$HOME/.turso/bin" >> $GITHUB_PATH
 
-      - name: Authenticate with Turso
-        run: turso config set token ${{ secrets.TURSO_AUTH_TOKEN }}""
+      - name: Authenticate with Turso (direct config)
+        run: |
+          mkdir -p $HOME/.config/turso
+          echo "[profile]" > $HOME/.config/turso/config.toml
+          echo "token='${{ secrets.TURSO_AUTH_TOKEN }}'" >> $HOME/.config/turso/config.toml
 
       - name: DB migration
         run: npm run db:migrate
